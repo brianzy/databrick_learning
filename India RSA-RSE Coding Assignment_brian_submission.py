@@ -560,18 +560,32 @@
 
 # COMMAND ----------
 
+# MAGIC %sql
+# MAGIC create table my_table2 as
+# MAGIC select name from my_table;
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC select * from my_table2
+
+# COMMAND ----------
+
 # MAGIC %python
 # MAGIC #//Answer here for Section 5 or create required cells here 
-# MAGIC # url = 'jdbc:databricks://adb-1332124237736688.8.azuredatabricks.net:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/1332124237736688/0216-182825-j7yyd3qp;AuthMech=3;UID=token;PWD=dapic35fddcf261d962fe82546ce43ca0650-3'
-# MAGIC url = 'jdbc:databricks://adb-1332124237736688.8.azuredatabricks.net:443/default;transportMode=http;ssl=1;AuthMech=3;httpPath=/sql/1.0/warehouses/cfc9c57af25cb50e;'
-# MAGIC driver_class = 'com.mysql.jdbc.Driver'
+# MAGIC from pyspark.sql.types import *
 # MAGIC 
+# MAGIC url = 'jdbc:databricks://adb-1332124237736688.8.azuredatabricks.net:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/1332124237736688/0216-182825-j7yyd3qp;AuthMech=3;UID=token;PWD=dapic35fddcf261d962fe82546ce43ca0650-3'
+# MAGIC 
+# MAGIC driver_class = 'com.databricks.client.jdbc.Driver'
 # MAGIC # create a DataFrame by querying the MySQL database
-# MAGIC df = spark.read.format("jdbc")\
+# MAGIC df_1 = spark.read.format("jdbc")\
 # MAGIC .option("url", url)\
 # MAGIC .option("driver", driver_class)\
-# MAGIC .option("dbtable", "my_table").load()
-# MAGIC df.show()
+# MAGIC .option("dbtable", 'partsupp')\
+# MAGIC .load()
+# MAGIC 
+# MAGIC df_1.show()
 
 # COMMAND ----------
 
